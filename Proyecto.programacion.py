@@ -76,20 +76,19 @@
 
 import math
 
-def mostrar_menu():
-    print("\n-------------------------ALGORITMO : CAJERO CALCULADORA--------------------")
-    print("Bienvenido al cajero de calculadora donde podrás elegir entre estas opciones:")
-    print("   a - Suma")
-    print("   b - Resta")
-    print("   c - Multiplicación")
-    print("   d - División")
-    print("   e - Exponente (potencia)")
-    print("   f - Raíz cuadrada")
-    print("   g - Multiplicar por PI")
-    print("   h - Módulo (residuo de una división)")
-    print("   i - Porcentaje")
-    print("   j - Descuento")
-    print("   k - Salir")
+print("\n-------------------------ALGORITMO : CAJERO CALCULADORA--------------------")
+print("Bienvenido al cajero de calculadora donde podrás elegir entre estas opciones:")
+print("   a - Suma")
+print("   b - Resta")
+print("   c - Multiplicación")
+print("   d - División")
+print("   e - Exponente (potencia)")
+print("   f - Raíz cuadrada")
+print("   g - Multiplicar por PI")
+print("   h - Módulo (residuo de una división)")
+print("   i - Porcentaje")
+print("   j - Descuento")
+print("   k - Salir")
 
 def suma():
     num1 = float(input("Ingrese el primer número: "))
@@ -139,6 +138,41 @@ def multiplicar_por_pi():
     resultado = num * math.pi
     print(f"El resultado de multiplicar {num} por PI es: {resultado}")
     return resultado
+def residuo():
+    num1 = int(input("Ingrese el primer número (dividendo): "))
+    num2 = int(input("Ingrese el segundo número (divisor): "))
+    if num2 != 0:
+        resultado = num1 % num2
+        print(f"El residuo de la división de {num1} entre {num2} es: {resultado}")
+        return resultado
+    else:
+        print("Error: No se puede dividir entre cero.")
+        return None
+def porcentaje():
+    num = float(input("Ingrese un número: "))
+    porcentaje = float(input("Ingrese el porcentaje a calcular: "))
+    resultado = num * (porcentaje / 100)
+    print(f"El {porcentaje}% de {num} es: {resultado}")
+    return resultado
+def descuento():
+    precio_original = float(input("Ingrese el precio original: "))
+    descuento = float(input("Ingrese el porcentaje de descuento: "))
+    precio_final = precio_original - (precio_original * (descuento / 100))
+    print(f"El precio final después de un descuento del {descuento}% es: {precio_final}")
+    return precio_final
+def salir():
+    print("Gracias por usar la maquina calculadora. ¡Hasta luego!")
 
-
-# Aquí comenzaría el bucle principal para leer la opción y procesar operaciones
+opciones = {
+    'a': suma,
+    'b': resta,
+    'c': multiplicacion,
+    'd': division,
+    'e': exponente,
+    'f': raiz_cuadrada,
+    'g': multiplicar_por_pi,
+    'h': residuo,
+    'i': porcentaje,
+    'j': descuento,
+    'k': salir
+}
