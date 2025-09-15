@@ -78,17 +78,7 @@ import math
 
 print("\n-------------------------ALGORITMO : CAJERO CALCULADORA--------------------")
 print("Bienvenido al cajero de calculadora donde podrás elegir entre estas opciones:")
-print("   a - Suma")
-print("   b - Resta")
-print("   c - Multiplicación")
-print("   d - División")
-print("   e - Exponente (potencia)")
-print("   f - Raíz cuadrada")
-print("   g - Multiplicar por PI")
-print("   h - Módulo (residuo de una división)")
-print("   i - Porcentaje")
-print("   j - Descuento")
-print("   k - Salir")
+
 
 def suma():
     num1 = float(input("Ingrese el primer número: "))
@@ -163,16 +153,49 @@ def descuento():
 def salir():
     print("Gracias por usar la maquina calculadora. ¡Hasta luego!")
 
-opciones = {
-    'a': suma,
-    'b': resta,
-    'c': multiplicacion,
-    'd': division,
-    'e': exponente,
-    'f': raiz_cuadrada,
-    'g': multiplicar_por_pi,
-    'h': residuo,
-    'i': porcentaje,
-    'j': descuento,
-    'k': salir
-}
+while True:
+    print("\nMenú:")
+    print("a - Suma")
+    print("b - Resta")
+    print("c - Multiplicación")
+    print("d - División")
+    print("e - Exponente")
+    print("f - Raíz cuadrada")
+    print("g - Multiplicar por PI")
+    print("h - Módulo")
+    print("i - Porcentaje")
+    print("j - Descuento")
+    print("k - Salir")
+
+    opcion = input("\nSeleccione una opción: ").lower()
+
+    if opcion == "a":
+        suma()
+    elif opcion == "b":
+        resta()
+    elif opcion == "c":
+        multiplicacion()
+    elif opcion == "d":
+        division()
+    elif opcion == "e":
+        exponente()
+    elif opcion == "f":
+        raiz_cuadrada()
+    elif opcion == "g":
+        multiplicar_por_pi()
+    elif opcion == "h":
+        residuo()
+    elif opcion == "i":
+        porcentaje()
+    elif opcion == "j":
+        descuento()
+    elif opcion == "k":
+        print("Gracias por usar la calculadora. ¡Adiós!")
+        break
+    else:
+        print("Opción no válida.")
+    
+    continuar = input("\n¿Quieres hacer otra operación? (s/n): ").lower()
+    if continuar != "s":
+        print("Programa terminado. ¡Hasta luego!")
+        break
