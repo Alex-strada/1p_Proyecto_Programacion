@@ -81,22 +81,38 @@ print("Bienvenido al cajero de calculadora donde podrás elegir entre estas opci
 
 
 def suma():
-    num1 = float(input("Ingrese el primer número: "))
-    num2 = float(input("Ingrese el segundo número: "))
-    resultado = num1 + num2
-    print(f"El resultado de la suma es: {resultado}")
+    cantidad = int(input("¿Cuántos números deseas sumar? "))
+    numeros = []
+    for i in range(cantidad):
+        num = float(input(f"Ingrese el número {i+1}: "))
+        numeros.append(num)
+    resultado = sum(numeros)
+    print(f"La suma de {numeros} es: {resultado}")
     return resultado
 def resta():
-    num1 = float(input("Ingrese el primer número: "))
-    num2 = float(input("Ingrese el segundo número: "))
-    resultado = num1 - num2
-    print(f"El resultado de la resta es: {resultado}")
+    cantidad = int(input("¿Cuántos números deseas restar? "))
+    numeros = []
+    for i in range(cantidad):
+        num = float(input(f"Ingrese el número {i+1}: "))
+        numeros.append(num)
+
+    resultado = numeros[0]
+    for i in range(1, len(numeros)):
+        resultado -= numeros[i]
+    print(f"La resta de {numeros} es: {resultado}")
     return resultado
+
 def multiplicacion():
-    num1 = float(input("Ingrese el primer número: "))
-    num2 = float(input("Ingrese el segundo número: "))
-    resultado = num1 * num2
-    print(f"El resultado de la multiplicación es: {resultado}")
+    cantidad = int(input("¿Cuántos números deseas multiplicar? "))
+    numeros = []
+    for i in range(cantidad):
+        num = float(input(f"Ingrese el número {i+1}: "))
+        numeros.append(num)
+
+    resultado = 1
+    for num in numeros:
+        resultado *= num
+    print(f"La multiplicación de {numeros} es: {resultado}")
     return resultado
 def division():
     num1 = float(input("Ingrese el primer número: "))
