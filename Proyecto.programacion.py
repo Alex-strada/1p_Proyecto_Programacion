@@ -79,41 +79,93 @@ import math
 print("\n-------------------------ALGORITMO : CAJERO CALCULADORA--------------------")
 print("Bienvenido al cajero de calculadora donde podrás elegir entre estas opciones:")
 
+# ================= FUNCIONES ===================
 
+# --- Funciones originales con listas simples ---
 def suma():
-    cantidad = int(input("¿Cuántos números deseas sumar? "))
-    numeros = []
-    for i in range(cantidad):
-        num = float(input(f"Ingrese el número {i+1}: "))
-        numeros.append(num)
-    resultado = sum(numeros)
-    print(f"La suma de {numeros} es: {resultado}")
-    return resultado
-def resta():
-    cantidad = int(input("¿Cuántos números deseas restar? "))
-    numeros = []
-    for i in range(cantidad):
-        num = float(input(f"Ingrese el número {i+1}: "))
-        numeros.append(num)
+    tipo = input("¿Deseas sumar números simples o una matriz? (número/matriz): ").lower()
+    if tipo == "número":
+        cantidad = int(input("¿Cuántos números deseas sumar? "))
+        numeros = [float(input(f"Ingrese el número {i+1}: ")) for i in range(cantidad)]
+        resultado = sum(numeros)
+        print(f"La suma de {numeros} es: {resultado}")
+        return resultado
+    elif tipo == "matriz":
+        return suma_matriz()
+    else:
+        print("Opción no válida.")
+        return None
 
-    resultado = numeros[0]
-    for i in range(1, len(numeros)):
-        resultado -= numeros[i]
-    print(f"La resta de {numeros} es: {resultado}")
-    return resultado
+def resta():
+    tipo = input("¿Deseas restar números simples o matrices? (número/matriz): ").lower()
+    if tipo == "número":
+        cantidad = int(input("¿Cuántos números deseas restar? "))
+        numeros = [float(input(f"Ingrese el número {i+1}: ")) for i in range(cantidad)]
+        resultado = numeros[0]
+        for num in numeros[1:]:
+            resultado -= num
+        print(f"La resta de {numeros} es: {resultado}")
+        return resultado
+    elif tipo == "matriz":
+        return resta_matrices()
+    else:
+        print("Opción no válida.")
+        return None
 
 def multiplicacion():
-    cantidad = int(input("¿Cuántos números deseas multiplicar? "))
-    numeros = []
-    for i in range(cantidad):
-        num = float(input(f"Ingrese el número {i+1}: "))
-        numeros.append(num)
+    tipo = input("¿Deseas multiplicar números simples o matrices? (número/matriz): ").lower()
+    if tipo == "número":
+        cantidad = int(input("¿Cuántos números deseas multiplicar? "))
+        numeros = [float(input(f"Ingrese el número {i+1}: ")) for i in range(cantidad)]
+        resultado = 1
+        for num in numeros:
+            resultado *= num
+        print(f"La multiplicación de {numeros} es: {resultado}")
+        return resultado
+    elif tipo == "matriz":
+        return multiplicacion_matrices()
+    else:
+        print("Opción no válida.")
+        return None
 
-    resultado = 1
-    for num in numeros:
-        resultado *= num
-    print(f"La multiplicación de {numeros} es: {resultado}")
+# --- Funciones de matrices ---
+def suma_matriz():
+    filas = int(input("Número de filas de la matriz: "))
+    columnas = int(input("Número de columnas de la matriz: "))
+    matriz = [[float(input(f"Ingrese elemento [{i+1},{j+1}]: ")) for j in range(columnas)] for i in range(filas)]
+    resultado = sum(sum(fila) for fila in matriz)
+    print(f"La matriz ingresada es: {matriz}")
+    print(f"La suma de todos los elementos es: {resultado}")
     return resultado
+
+def resta_matrices():
+    filas = int(input("Número de filas de la matriz: "))
+    columnas = int(input("Número de columnas de la matriz: "))
+    print("Ingrese la primera matriz:")
+    matriz1 = [[float(input(f"Elemento [{i+1},{j+1}]: ")) for j in range(columnas)] for i in range(filas)]
+    print("Ingrese la segunda matriz:")
+    matriz2 = [[float(input(f"Elemento [{i+1},{j+1}]: ")) for j in range(columnas)] for i in range(filas)]
+    resultado = [[matriz1[i][j] - matriz2[i][j] for j in range(columnas)] for i in range(filas)]
+    print(f"Resultado de la resta: {resultado}")
+    return resultado
+
+def multiplicacion_matrices():
+    filas1 = int(input("Filas de la primera matriz: "))
+    columnas1 = int(input("Columnas de la primera matriz: "))
+    filas2 = int(input("Filas de la segunda matriz: "))
+    columnas2 = int(input("Columnas de la segunda matriz: "))
+    if columnas1 != filas2:
+        print("Error: columnas de la primera matriz deben ser igual a filas de la segunda.")
+        return None
+    print("Ingrese la primera matriz:")
+    matriz1 = [[float(input(f"Elemento [{i+1},{j+1}]: ")) for j in range(columnas1)] for i in range(filas1)]
+    print("Ingrese la segunda matriz:")
+    matriz2 = [[float(input(f"Elemento [{i+1},{j+1}]: ")) for j in range(columnas2)] for i in range(filas2)]
+    resultado = [[sum(matriz1[i][k]*matriz2[k][j] for k in range(columnas1)) for j in range(columnas2)] for i in range(filas1)]
+    print(f"Resultado de la multiplicación: {resultado}")
+    return resultado
+
+# --- Otras funciones simples ---
 def division():
     num1 = float(input("Ingrese el primer número: "))
     num2 = float(input("Ingrese el segundo número: "))
@@ -124,12 +176,14 @@ def division():
     else:
         print("Error: No se puede dividir entre cero.")
         return None
+
 def exponente():
     base = float(input("Ingrese la base: "))
     exponente = float(input("Ingrese el exponente: "))
     resultado = base ** exponente
     print(f"El resultado de {base} elevado a {exponente} es: {resultado}")
     return resultado
+
 def raiz_cuadrada():
     num = float(input("Ingrese un número: "))
     if num >= 0:
@@ -139,11 +193,13 @@ def raiz_cuadrada():
     else:
         print("Error: No se puede calcular la raíz cuadrada de un número negativo.")
         return None
+
 def multiplicar_por_pi():
     num = float(input("Ingrese un número: "))
     resultado = num * math.pi
     print(f"El resultado de multiplicar {num} por PI es: {resultado}")
     return resultado
+
 def residuo():
     num1 = int(input("Ingrese el primer número (dividendo): "))
     num2 = int(input("Ingrese el segundo número (divisor): "))
@@ -154,21 +210,25 @@ def residuo():
     else:
         print("Error: No se puede dividir entre cero.")
         return None
+
 def porcentaje():
     num = float(input("Ingrese un número: "))
     porcentaje = float(input("Ingrese el porcentaje a calcular: "))
     resultado = num * (porcentaje / 100)
     print(f"El {porcentaje}% de {num} es: {resultado}")
     return resultado
+
 def descuento():
     precio_original = float(input("Ingrese el precio original: "))
     descuento = float(input("Ingrese el porcentaje de descuento: "))
     precio_final = precio_original - (precio_original * (descuento / 100))
     print(f"El precio final después de un descuento del {descuento}% es: {precio_final}")
     return precio_final
+
 def salir():
     print("Gracias por usar la maquina calculadora. ¡Hasta luego!")
 
+# ================= MENÚ ===================
 while True:
     print("\nMenú:")
     print("a - Suma")
